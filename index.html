@@ -10,34 +10,36 @@
     <h1>Hello, World!</h1>
     <script>
       MP.api.jql(function main() {
-  return Events({
-    from_date: '2016-08-15',
-    to_date:   '2016-08-16'
-  })
-  .groupByUser(function(acc, events){
-    acc =  acc || {}
-    _.each(events, function(event){
-      acc[event.name] = acc[event.name] ? acc[event.name] +1 : acc[event.name] =1 
-    })
-    return acc
-  })
-  .reduce(function(accs, item){
-    accs = accs || []
-    var info = []
-    _.each(item, function(user, index){
-      info.push(user.value)
-    })
-    _.each(accs, function(acc, key){
-      _.each(acc, function(arrays, keys){
-           info.push(arrays)
-       })
-    })
-    return info
-  })
-}).done(function(results){
-              console.log(results)
-            })
-            
+        return Events({
+          from_date: '2016-08-15',
+          to_date:   '2016-08-16'
+        })
+        .groupByUser(function(acc, events){
+          acc =  acc || {}
+          _.each(events, function(event){
+            acc[event.name] = acc[event.name] ? acc[event.name] +1 : acc[event.name] =1 
+          })
+          return acc
+        })
+        .reduce(function(accs, item){
+          accs = accs || []
+          var info = []
+          _.each(item, function(user, index){
+            info.push(user.value)
+          })
+          _.each(accs, function(acc, key){
+            _.each(acc, function(arrays, keys){
+                 info.push(arrays)
+             })
+          })
+          return info
+        })
+      }).done(function(results){  
+        console.log(results)
+        var data = results[0]
+        console.log(data)
+      })
+      
       //correlation function
       function pearsonCorrelation(prefs, p1, p2) {
         var si = [];
