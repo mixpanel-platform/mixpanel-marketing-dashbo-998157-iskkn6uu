@@ -21,6 +21,13 @@
           })
           return acc
         })
+        .reduce(function(accs, item){
+          accs = accs || {}
+          _.each(item, function(user, index){
+            accs.push(user.value)
+          })
+          return accs
+        })
       }).done(function(results){
               console.log(results)
             })
