@@ -21,7 +21,20 @@
     })
     return acc
   })
-  }).done(function(results){
+  .reduce(function(accs, item){
+    accs = accs || []
+    var info = []
+    _.each(item, function(user, index){
+      info.push(user.value)
+    })
+    _.each(accs, function(acc, key){
+      _.each(acc, function(arrays, keys){
+           info.push(arrays)
+       })
+    })
+    return info
+  })
+}).done(function(results){
               console.log(results)
             })
             
